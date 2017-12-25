@@ -1,0 +1,32 @@
+package com.coffee.minidao.datasource;
+
+import java.util.Map;
+
+import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookup;
+
+public class DynamicDataSource extends AbstractRoutingDataSource {
+
+	@Override
+	protected Object determineCurrentLookupKey() {
+		DataSourceType dataSourceType = DataSourceContextHolder.getDataSourceType();
+		
+		return dataSourceType;
+	}
+	
+	@Override
+	public void setDataSourceLookup(DataSourceLookup dataSourceLookup) {
+		super.setDataSourceLookup(dataSourceLookup);
+	}
+	
+	@Override
+	public void setDefaultTargetDataSource(Object defaultTargetDataSource) {
+		super.setDefaultTargetDataSource(defaultTargetDataSource);
+	}
+
+	@Override
+	public void setTargetDataSources(Map<Object, Object> targetDataSources) {
+		super.setTargetDataSources(targetDataSources);
+	}
+
+}
